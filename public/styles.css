@@ -1,0 +1,76 @@
+/* Reset default browser styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Body styles */
+body {
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+    padding: 20px;
+}
+
+/* Page title */
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Form container styles */
+form {
+    max-width: 400px;
+    margin: 0 auto;
+    background: #f9f9f9;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+/* Form title styles */
+form h2 {
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+/* Form input styles */
+form input[type="text"],
+form input[type="email"],
+form input[type="password"] {
+    width: calc(100% - 20px);
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+}
+
+/* Form button styles */
+form button[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+form button[type="submit"]:hover {
+    background-color: #45a049;
+}
+
+/* Admin Dashboard link styles */
+a {
+    display: block;
+    text-align: center;
+    margin-top: 20px;
+    color: #1e90ff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px;
+            border-bottom: 1px solid #ddd;
+        }
+        .file-actions {
+            display: flex;
+            gap: 10px;
+        }
+        .file-actions button {
+            cursor: pointer;
+            padding: 8px 12px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            transition: background-color 0.3s ease;
+        }
+        .file-actions button:hover {
+            background-color: #45a049;
+        }
+        #backButton {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        #backButton:hover {
+            background-color: #0073e6;
+        }
+        .downloadButton{
+            cursor: pointer;
+    padding: 8px 12px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+        }
+    .deleteButton {
+    cursor: pointer;
+    padding: 8px 12px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.downloadButton:hover{
+    background-color: #45a049;
+}
+.deleteButton:hover {
+    background-color: red;
+}
+
+/* Styling for the file actions container */
+.file-actions {
+    display: flex;
+    gap: 10px;
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <h2>Uploaded Files</h2>
+        <ul id="fileList"></ul>
+        <button id="backButton">Back</button>
+    </div>
+    <script src="main.js"></script>
+</body>
+</html>
