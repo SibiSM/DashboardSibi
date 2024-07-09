@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node app.js"
+    "start": "node index.js",
+    "build": "echo 'Build step not specified'",
+    "test": "echo 'No tests specified' && exit 0"
   },
   "keywords": [],
-  "author": "",
+  "author": "Sibi",
   "license": "ISC",
   "dependencies": {
     "@azure/storage-blob": "^12.23.0",
@@ -29,5 +30,5 @@
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^8.0.0"
   },
-  "description": ""
+  "description": "Web app"
 }
