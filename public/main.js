@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const apiUrl = 'http://localhost:8000/api';
+    const apiUrl = 'http://localhost:8080/api';
 
     // Register Form Submission
     const registerForm = document.getElementById('registerForm');
