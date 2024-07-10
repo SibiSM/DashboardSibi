@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const apiUrl = process.env.REACT_APP_API_URL;
+    const apiUrl = https://sibidashboard.azurewebsites.net/api;
 
     // Register Form Submission
     const registerForm = document.getElementById('registerForm');
