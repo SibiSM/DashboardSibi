@@ -46,7 +46,7 @@ app.use('/api', uploadRoute); // Mount the upload route
 app.use('/api/admin', adminRoute); // Mount the admin route
 
 // Start server
-const PORT = process.env.PORT || 8080;
+const PORT = 8080;
 app.listen(PORT, () => {
   console.log(`Server started on port ${PORT}`);
 });
