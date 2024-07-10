@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:8080/api';
+const apiUrl = 'https://sibidashboard2.azurewebsites.net/api';
 
 // Register Form Submission
 document.getElementById('registerForm').addEventListener('submit', async (e) => {

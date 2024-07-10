@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const apiUrl = 'http://localhost:8080/api';
+    const apiUrl = 'https://sibidashboard2.azurewebsites.net/api';
 
     // Register Form Submission
     const registerForm = document.getElementById('registerForm');
