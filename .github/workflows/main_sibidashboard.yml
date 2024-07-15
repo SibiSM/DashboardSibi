@@ -11,7 +11,7 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: windows-latest
 
     steps:
       - uses: actions/checkout@v4
@@ -26,15 +26,12 @@ jobs:
           npm install
           npm run build --if-present
           npm run test --if-present
-
-      - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
-
+      
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: release.zip
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
@@ -50,20 +47,17 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: node-app
-
-      - name: Unzip artifact for deployment
-        run: unzip release.zip
       
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_7F7DB135E5B74964B6C208B0E187ADAE }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_D27D4DE083A64330BD5ECC6857BB79C2 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_E27EAF993421468EB05A086B310EE147 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A47C119A30E341B1B7CF5471049C352A }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_FB15E2ED997E497F8C5DA1F02A88A3C1 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_65CAC4A4857F444F8FC39A84D5F4F276 }}
 
       - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
         uses: azure/webapps-deploy@v3
+        id: deploy-to-webapp
         with:
           app-name: 'sibidashboard'
           slot-name: 'Production'
