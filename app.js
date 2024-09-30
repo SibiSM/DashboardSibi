@@ -4,6 +4,7 @@ const app = express();
 const cors = require('cors');
 const path = require('path');
 const bodyParser = require('body-parser');
+const appInsights = require('applicationinsights');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const { connect } = require('./Database_mongoose.js');
@@ -16,6 +17,14 @@ const retrieveRoute = require('./routes/retrieve');;
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(express.json());
 app.use(cors());
+
+appInsights.setup(process.env.APPINSIGHTS_CONNECTION_STRING)
+    .setAutoCollectRequests(true)
+    .setAutoCollectDependencies(true)
+    .setAutoCollectPerformance(true)
+    .setAutoCollectExceptions(true)
+    .setAutoCollectConsole(true)
+    .start();
 
 // Initialize authentication middleware
 authMiddleware();
