@@ -12,6 +12,7 @@
   "license": "ISC",
   "dependencies": {
     "@azure/storage-blob": "^12.23.0",
+    "applicationinsights": "^3.3.0",
     "azure-storage": "^2.10.7",
     "bcryptjs": "^2.4.3",
     "connect-flash": "^0.1.1",
