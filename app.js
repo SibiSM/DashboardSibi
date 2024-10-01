@@ -15,15 +15,8 @@ const appInsights = require('applicationinsights');
 const User = require('./models/user.js');
 const retrieveRoute = require('./routes/retrieve');;
 app.use(bodyParser.urlencoded({ extended: false }));
-
-const corsOptions = {
-  origin: 'https://sibidashboard2.azurewebsites.net/api', // Allow requests from this origin
-  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-  credentials: true, // Allow credentials (cookies, authorization headers)
-};
-
 app.use(express.json());
-app.use(cors(corsOptions));
+app.use(cors());
 
 appInsights.setup(process.env.APPINSIGHTS_CONNECTION_STRING)
     .setAutoCollectRequests(true)
@@ -64,7 +57,6 @@ app.use('/api/admin', adminRoute); // Mount the admin route
 const telemetryClient = appInsights.defaultClient;
 
 telemetryClient.trackEvent({ name: "AppStarted" });
-console.log("App Insights Connection String:", process.env.APPINSIGHTS_CONNECTION_STRING);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
