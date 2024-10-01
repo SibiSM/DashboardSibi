@@ -4,7 +4,6 @@ const app = express();
 const cors = require('cors');
 const path = require('path');
 const bodyParser = require('body-parser');
-const appInsights = require('applicationinsights');
 const passport = require('passport');
 const LocalStrategy = require('passport-local');
 const { connect } = require('./Database_mongoose.js');
@@ -12,11 +11,19 @@ const authMiddleware = require('./middleware/auth');
 const accountController = require('./controllers/accountController');
 const uploadRoute = require('./routes/upload1');
 const adminRoute = require('./routes/admin');
+const appInsights = require('applicationinsights');
 const User = require('./models/user.js');
 const retrieveRoute = require('./routes/retrieve');;
 app.use(bodyParser.urlencoded({ extended: false }));
+
+const corsOptions = {
+  origin: 'https://sibidashboard2.azurewebsites.net/api', // Allow requests from this origin
+  methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+  credentials: true, // Allow credentials (cookies, authorization headers)
+};
+
 app.use(express.json());
-app.use(cors());
+app.use(cors(corsOptions));
 
 appInsights.setup(process.env.APPINSIGHTS_CONNECTION_STRING)
     .setAutoCollectRequests(true)
@@ -53,6 +60,11 @@ app.post('/api/login', passport.authenticate('local', { session: false }), accou
 app.post('/api/register', accountController.register);
 app.use('/api', uploadRoute); // Mount the upload route
 app.use('/api/admin', adminRoute); // Mount the admin route
+
+const telemetryClient = appInsights.defaultClient;
+
+telemetryClient.trackEvent({ name: "AppStarted" });
+console.log("App Insights Connection String:", process.env.APPINSIGHTS_CONNECTION_STRING);
 
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
