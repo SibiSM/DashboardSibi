@@ -1,4 +1,4 @@
-const apiUrl = 'https://sibidashboard2-akdzh3ahheanc7da.eastus-01.azurewebsites.net/api';
+const apiUrl = 'https://sibidashboard2.azurewebsites.net/api';
 
 // Register Form Submission
 document.getElementById('registerForm').addEventListener('submit', async (e) => {
