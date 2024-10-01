@@ -69,43 +69,51 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Upload Form Submission
-    const uploadForm = document.getElementById('uploadForm');
-    if (uploadForm) {
-        uploadForm.addEventListener('submit', async (e) => {
-            e.preventDefault();
-            const fileInput = document.getElementById('fileInput');
-            const files = Array.from(fileInput.files); // Get all files
-    
-            const token = localStorage.getItem('token');
-    
-            try {
-                for (const file of files) {
-                    const formData = new FormData();
-                    formData.append('file', file);
-    
-                    const response = await fetch(`${apiUrl}/upload`, {
-                        method: 'POST',
-                        headers: {
-                            'Authorization': `Bearer ${token}`
-                        },
-                        body: formData
-                    });
-    
-                    if (!response.ok) {
-                        throw new Error('Failed to upload file');
-                    }
-    
-                    const data = await response.json();
-                    alert(data.message); // Alert for each file
+    // Upload Form Submission
+const uploadForm = document.getElementById('uploadForm');
+if (uploadForm) {
+    uploadForm.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const fileInput = document.getElementById('fileInput');
+        const files = Array.from(fileInput.files); // Get all files
+
+        const token = localStorage.getItem('token');
+        const batchSize = 5; // Adjust the batch size as needed
+
+        try {
+            for (let i = 0; i < files.length; i += batchSize) {
+                const batch = files.slice(i, i + batchSize); // Get a batch of files
+                const formData = new FormData();
+
+                // Append each file in the batch to FormData
+                batch.forEach(file => {
+                    formData.append('files', file); // Change 'file' to 'files' if the backend expects an array
+                });
+
+                const response = await fetch(`${apiUrl}/upload`, {
+                    method: 'POST',
+                    headers: {
+                        'Authorization': `Bearer ${token}`
+                    },
+                    body: formData
+                });
+
+                if (!response.ok) {
+                    throw new Error('Failed to upload files in batch');
                 }
-            } catch (error) {
-                console.error('Error uploading files:', error);
-                alert('Failed to upload files');
+
+                const data = await response.json();
+                alert(data.message); // Alert for each batch
             }
-        });    
-    } else {
-        console.error('uploadForm element not found');
-    }
+        } catch (error) {
+            console.error('Error uploading files:', error);
+            alert('Failed to upload files');
+        }
+    });
+} else {
+    console.error('uploadForm element not found');
+}
+
 
     // // // Admin Dashboard
     // const fileList = document.getElementById('fileList');
