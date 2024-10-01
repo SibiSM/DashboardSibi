@@ -11,7 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const password = document.getElementById('registerPassword').value;
 
             try {
-                const response = await fetch(`${apiUrl}/register`, {
+                const response = await fetch(`https://sibidashboard2.azurewebsites.net/api/register`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -44,7 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const password = document.getElementById('loginPassword').value;
 
             try {
-                const response = await fetch(`${apiUrl}/login`, {
+                const response = await fetch(`https://sibidashboard2.azurewebsites.net/api/login`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
