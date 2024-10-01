@@ -27,8 +27,8 @@ jobs:
       - name: Create a ZIP archive
         run: |
           # Create a zip of the current directory, excluding node_modules
-          zip -r node-app.zip . -x 'node_modules/*'
-      
+          Compress-Archive -Path * -DestinationPath node-app.zip -CompressionLevel Optimal -Exclude node_modules
+
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
