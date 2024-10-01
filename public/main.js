@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const apiUrl = 'https://sibidashboard2.azurewebsites.net/api';
+    const apiUrl = 'http://localhost:8080/api';
 
     // Register Form Submission
     const registerForm = document.getElementById('registerForm');
@@ -74,33 +74,35 @@ document.addEventListener('DOMContentLoaded', () => {
         uploadForm.addEventListener('submit', async (e) => {
             e.preventDefault();
             const fileInput = document.getElementById('fileInput');
-            const file = fileInput.files[0];
-
-            const formData = new FormData();
-            formData.append('file', file);
-
+            const files = Array.from(fileInput.files); // Get all files
+    
             const token = localStorage.getItem('token');
-
+    
             try {
-                const response = await fetch(`${apiUrl}/upload`, {
-                    method: 'POST',
-                    headers: {
-                        'Authorization': `Bearer ${token}`
-                    },
-                    body: formData
-                });
-
-                if (!response.ok) {
-                    throw new Error('Failed to upload file');
+                for (const file of files) {
+                    const formData = new FormData();
+                    formData.append('file', file);
+    
+                    const response = await fetch(`${apiUrl}/upload`, {
+                        method: 'POST',
+                        headers: {
+                            'Authorization': `Bearer ${token}`
+                        },
+                        body: formData
+                    });
+    
+                    if (!response.ok) {
+                        throw new Error('Failed to upload file');
+                    }
+    
+                    const data = await response.json();
+                    alert(data.message); // Alert for each file
                 }
-
-                const data = await response.json();
-                alert(data.message);
             } catch (error) {
-                console.error('Error uploading file:', error);
-                alert('Failed to upload file');
+                console.error('Error uploading files:', error);
+                alert('Failed to upload files');
             }
-        });
+        });    
     } else {
         console.error('uploadForm element not found');
     }
