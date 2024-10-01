@@ -1,3 +1,6 @@
+# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
+# More GitHub Actions for Azure: https://github.com/Azure/actions
+
 name: Build and deploy Node.js app to Azure Web App - sibidashboard2
 
 on:
@@ -24,16 +27,11 @@ jobs:
           npm run build --if-present
           npm run test --if-present
       
-      - name: Create a ZIP archive excluding node_modules
-        run: |
-          # Create a zip of the current directory, excluding node_modules
-          Get-ChildItem -Recurse -File | Where-Object { $_.FullName -notlike "*node_modules*" } | Compress-Archive -DestinationPath node-app.zip -CompressionLevel Optimal
-
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
           name: node-app
-          path: node-app.zip
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
@@ -53,9 +51,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v2
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_6D956440CD29437B86F2AD533B4936FC }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_B5BADD73838349E9889ECD98E355A6BD }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_551E428D003D41C3AA56F0B245A1A787 }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_D495422321074360B589BF4CEEC36EBF }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_6C6504AC7A5C4FE2BD8CF01B45D03619 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_4B60991007A94B3AB40490B34B6B174F }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v3
@@ -63,4 +61,5 @@ jobs:
         with:
           app-name: 'sibidashboard2'
           slot-name: 'Production'
-          package: node-app.zip
+          package: .
+          
