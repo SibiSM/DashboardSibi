@@ -1,4 +1,3 @@
-document.addEventListener('DOMContentLoaded', () => {
     const apiUrl = 'https://sibidashboard2.azurewebsites.net/api';
 
     // Register Form Submission
@@ -235,4 +234,3 @@ if (uploadForm) {
 
     // Initial fetch of files
     fetchFiles();
-});
